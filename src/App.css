@@ -1,0 +1,73 @@
+:root {
+  --primary-font-color: #3f9998;
+  --primary-bg-color: #1C2541;
+}
+
+.App {
+  text-align: center;
+  overflow: none;
+  min-width: 100vw;
+  min-height: 99vh;
+  padding-top: 1vh;
+  background-color: var(--primary-bg-color);
+}
+
+.App-logo {
+  height: 10vmin;
+  width: auto;
+  pointer-events: none;
+}
+
+.App-login {
+  color: var(--primary-bg-color);
+  border-radius: 5px 5px;
+  padding: 2px 4px;
+  width: 10vw;
+}
+
+.App-IDbox {
+  width: auto;
+  font-size: 12pt;
+}
+
+.App-main-input {
+  background-color: #dbdbdb;
+  width: 20vw;
+  border-radius: 0;
+}
+
+.App-btn {
+  width: 10%;
+  height: 30pt;
+  margin: auto auto;
+}
+
+.App-main-input > input, .App-main-input > input:active  {
+  background-color: transparent;
+  width: 97%;
+  height: 25pt;
+  text-align: center;
+  border: none !important;
+  color: #535252;
+  border-radius: inherit;
+}
+
+.App-header {
+  min-height: auto;
+  min-width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: top;
+  font-size: calc(12px + 2vmin);
+  color: var(--primary-font-color);
+}
+
+.App-title {
+  margin: auto auto auto .5em;
+}
+
+.flex-box{
+  display: flex;
+  padding-top: 5pt;
+}
