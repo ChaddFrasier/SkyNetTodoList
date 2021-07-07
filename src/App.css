@@ -30,26 +30,43 @@
   font-size: 12pt;
 }
 
-.App-main-input {
-  background-color: #dbdbdb;
-  width: 20vw;
-  border-radius: 0;
-}
-
 .App-btn {
-  width: 10%;
-  height: 30pt;
-  margin: auto auto;
+  width: 3.1em;
+  height: 3.1em;
+  margin: auto auto auto auto;
+  border-radius: 0px 4px 4px 0px;
+  border: black;
 }
 
-.App-main-input > input, .App-main-input > input:active  {
-  background-color: transparent;
-  width: 97%;
-  height: 25pt;
+.App-btn:hover {
+  background-color: #888888;
+  border: #b9b9b9;
+}
+
+.App-main-input {
+  background-color: #b9b9b9;
+  width: 20vw;
+  height: auto;
+  border: black;
+}
+
+.App-label {
+  font-size: calc(12px*1vmax);
+}
+
+
+.App-main-input > input:focus-visible, .App-main-input > input:focus {
+  outline: none !important;
+}
+
+.App-main-input > input {
+  background-color: #b9b9b9;
+  width: inherit;
   text-align: center;
-  border: none !important;
-  color: #535252;
-  border-radius: inherit;
+  height: 2em;
+  border: none;
+  margin: auto 0 auto 0;
+  border-radius: 4px 0px 0px 4px;
 }
 
 .App-header {
@@ -69,5 +86,5 @@
 
 .flex-box{
   display: flex;
-  padding-top: 5pt;
+  padding: 0;
 }

@@ -93,10 +93,15 @@ function App() {
     console.log("Adding this new task to the taskArr")
     e.preventDefault()
 
+    if (taskText === '') {
+      return true
+    }
     const newArr = taskArr.length > 0 ? taskArr.concat(taskText): [taskText];
 
     setTaskArr(newArr)
+    // reset the input field
     e.target[0].value = ""
+    updateInputText(e.target[0].value)
   }
 
   const generateRandomTask = () => {
@@ -133,7 +138,7 @@ function App() {
         <Container>
           <SignInForm {...fdSignIn} />
         </Container>
-        <Container className="flex-box">
+        <Container>
           <ListForm {...fdList} />
         </Container>
         <Container className="flex-box">
