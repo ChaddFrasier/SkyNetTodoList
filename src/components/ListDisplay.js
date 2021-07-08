@@ -1,15 +1,31 @@
 import {
-    Divider
-  } from 'semantic-ui-react';
+    Form,
+    Table,
+    Button  } from 'semantic-ui-react';
 
 const ListDisplay = (props) => {
+    const taskItems = props.taskArr.map((task, i) => {
+
+        return (
+            <Table.Row key={i} id={i} className="table">
+                <Table.Cell className="button-column">
+                    <Form id={`deleteForm-${i}`} onSubmit={props.deleteTask}>
+                        <Button id={`deleteBtn-${i}`} type="submit" className="App-list-btn">x</Button>
+                    </Form>
+                </Table.Cell>
+                <Table.Cell className="App-list-view">{task}</Table.Cell>
+            </Table.Row>
+        )
+    });
     
-    if(props.taskArr.length) {
+    if(props.taskArr.length > 0) {
         return (
             <>
-            <Divider> 
-                Hello World! the current task array has {props.taskArr.length} number of tasks.
-            </Divider>
+            <Table>
+                <Table.Body>
+                    {taskItems}
+                </Table.Body>
+            </Table>
             </>
         )
     }

@@ -28,7 +28,6 @@ function App() {
   
   const [dataKey, setDataKey] = useState('');
   const [filePath, setFilePath] = useState();
-  
 
   // When dataKey changes, update FilePath state.
   useEffect(() => {
@@ -89,8 +88,14 @@ function App() {
     }
   }
 
+  const deleteTask = async (e) => {
+    e.preventDefault()
+    const removeIndex = Number(e.target.id.split('-')[1])
+
+    setTaskArr(taskArr.slice(0, removeIndex).concat(taskArr.slice(removeIndex+1)))
+  }
+
   const addTaskSubmitFunc = async (e) => {
-    console.log("Adding this new task to the taskArr")
     e.preventDefault()
 
     if (taskText === '') {
@@ -102,13 +107,6 @@ function App() {
     // reset the input field
     e.target[0].value = ""
     updateInputText(e.target[0].value)
-  }
-
-  const generateRandomTask = () => {
-    const min = 1,
-      max = 1000;
-
-      return min + Math.random() * ( max-min )
   }
 
   const fdSignIn = {
@@ -125,11 +123,12 @@ function App() {
   }
 
   const displayData = {
-    taskArr
+    taskArr,
+    deleteTask
   }
 
   return (
-    <div className="App">
+    <Divider className="App">
       <Header className="App-header">
         <Divider className="flex-box">
           <img src={logo} className="App-logo" alt="logo" />
@@ -141,11 +140,11 @@ function App() {
         <Container>
           <ListForm {...fdList} />
         </Container>
-        <Container className="flex-box">
+        <Container>
           <ListDisplay {...displayData} />
         </Container>
       </Header>
-    </div>
+    </Divider>
   );
 }
 

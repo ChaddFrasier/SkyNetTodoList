@@ -1,5 +1,5 @@
 :root {
-  --primary-font-color: #3f9998;
+  --primary-font-color: #50b4b3;
   --primary-bg-color: #1C2541;
 }
 
@@ -88,3 +88,44 @@
   display: flex;
   padding: 0;
 }
+
+.App-list-view {
+  width: 40vw;
+  text-align: center;
+}
+
+.App-list-btn {
+  width: 3.1em;
+  height: 3.1em;
+  border-radius: 5px;
+  border: black;
+}
+
+.App-list-btn:hover {
+  background-color: #888888;
+}
+
+.table {
+  background-color: #173177;
+  color: #50b4b3;
+  border-color: #50b4b3;
+}
+
+table {
+  width: 100%;
+  margin: 0 auto 0 auto;
+}
+
+td {
+  text-align: left;
+  padding: 5px;
+  border: 2px solid #50b4b3;
+}
+
+.button-column {
+  width: 3rem;
+  text-align: center;
+  vertical-align: middle;
+  padding: 0;
+}
+
