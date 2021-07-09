@@ -19,7 +19,9 @@ const ListForm = (props) => {
                     className="App-label"
                     content="List Name"
                     />
-                    <Input id="listNameInput" className="App-secondary-input" type="text" onChange={props.setDataKey}/>
+                    <Input id="listNameInput" className="App-secondary-input" type="text" onChange={function(e){
+                        props.setDataKey(e.target.value)
+                    }}/>
                 </Divider>
                 <br/>
                 <Divider className="flex-box">
@@ -28,6 +30,7 @@ const ListForm = (props) => {
                     content="Add Task"
                     />
                     <Input
+                    id="inputField"
                     className="App-main-input"
                     type="text"
                     placeholder="Go to the store"

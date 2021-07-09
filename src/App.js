@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
-
 import logo from './assets/checkbox_icon.svg';
 import './App.css';
 import SignInForm from './components/SignInOut'
 import ListForm from './components/ListForm'
 import ListDisplay from './components/ListDisplay'
 import Loading from './components/Loader'
-
 import { ContentRecordDAC } from '@skynetlabs/content-record-library';
 import { Header, Container, Divider } from 'semantic-ui-react';
+
 // Import the SkynetClient and a helper
 import { SkynetClient } from 'skynet-js';
 
 // We'll define a portal to allow for developing on localhost.
-const portal = window.location.hostname === 'localhost' ? 'https://siasky.net' : undefined;
+//const portal = window.location.hostname === 'localhost' ? 'https://siasky.net' : undefined;
+//const client = new SkynetClient(portal);
+
 // Initiate the SkynetClient
 // Note: When hosted on a skynet portal, SkynetClient doesn't need any arguments.
-const client = new SkynetClient(portal);
+const client = new SkynetClient();
 
 const contentRecord = new ContentRecordDAC();
 
-/** Basic Application UI */
+/** Main Application Func */
 function App() {
   const [userID, setUserID] = useState();
   const [mySky, setMySky] = useState();
@@ -71,22 +72,33 @@ function App() {
     initMySky();
   }, []);
 
+  /** Sign Out of mySky: basic */
   const signOutSubmitFunc = async () => {
-    setLoading(true)
-
     // call logout to globally logout of mysky
     await mySky.logout();
 
     //set react state
     setLoggedIn(false);
     setUserID('');
-    setLoading(false)
   }
 
+  /** Sign In to mySky: basic */
+  const signInSubmitFunc = async () => {
+    // Try login again, opening pop-up. Returns true if successful
+    const status = await mySky.requestLoginAccess();
+    // set react state
+    setLoggedIn(status);
+
+    if (status) {
+      setUserID(await mySky.userID());
+    }
+  }
+  
+  /** Load Data using the name of the list */
   const loadData = async (e) => {
     e.preventDefault()
     setLoading(true)
-    console.log("filePath", filePath)
+    
     // Use getJSON to load the user's information from SkyDB
     const { data } = await mySky.getJSON(filePath);
 
@@ -100,19 +112,7 @@ function App() {
     setLoading(false)
   }
 
-  const signInSubmitFunc = async () => {
-    setLoading(true)
-    // Try login again, opening pop-up. Returns true if successful
-    const status = await mySky.requestLoginAccess();
-    // set react state
-    setLoggedIn(status);
-
-    if (status) {
-      setUserID(await mySky.userID());
-    }
-    setLoading(false)
-  }
-
+  /** Remove specific task from array: *no update to DB* */
   const deleteTask = async (e) => {
     e.preventDefault()
     const removeIndex = Number(e.target.id.split('-')[1])
@@ -120,52 +120,62 @@ function App() {
     setTaskArr(taskArr.slice(0, removeIndex).concat(taskArr.slice(removeIndex+1)))
   }
 
+  /** Add Values to the current list: *no update to DB* */
   const addTaskSubmitFunc = async (e) => {
     e.preventDefault()
 
     if (taskText === '') {
       return true
     }
+    
+    // create the new array
     const newArr = taskArr.length > 0 ? taskArr.concat(taskText): [taskText];
-
+    // set the state
     setTaskArr(newArr)
+
     // reset the input field
-    e.target[1].value = ""
-    updateInputText(e.target[1].value)
+    document.getElementById('inputField').value = ""
+    updateInputText(document.getElementById('inputField').value)
   }
 
+  /** Save the user list data to mySky */
   const saveDataToSky = async (jsonData) => {
     setLoading(true)
     // Use setJSON to save the user's information to MySky file
     try {
-      console.log('userID', userID);
-      console.log('filePath', filePath);
-
       await mySky.setJSON(filePath, jsonData);
+
+      // Tell contentRecord we updated the color
+      await contentRecord.recordInteraction({
+        skylink: filePath,
+        metadata: { action: 'userUpdatedList' },
+      });
 
     } catch (error) {
       console.log(`error with setJSON: ${error.message}`);
     }
+
     setLoading(false)
   }
 
+  /** Initate the save sequemce to mySky */
   const uploadData = (e) => {
     e.preventDefault()
-    setLoading(true)
+    
     if(document.getElementById("listNameInput").value)
     {
+      document.getElementById("listNameInput").classList.remove("error")
+      setLoading(true)
       const jsonData = {
         taskArr
       }
-
       saveDataToSky(jsonData)
     }
     else
     {
       // tell the user to input a name
+      document.getElementById("listNameInput").classList.add("error")
     }
-
-    setLoading(false)
   }
 
   const fdSignIn = {

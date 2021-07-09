@@ -148,3 +148,7 @@ td {
   padding: 0;
 }
 
+.error {
+  border: 2px solid red !important;
+}
+
