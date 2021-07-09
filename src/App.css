@@ -48,6 +48,7 @@
   width: 20vw;
   height: auto;
   border: black;
+  margin-left: 10px;
 }
 
 .App-label {
@@ -69,6 +70,16 @@
   border-radius: 4px 0px 0px 4px;
 }
 
+.App-secondary-input > input {
+  background-color: #b9b9b9;
+  width: inherit;
+  text-align: center;
+  height: 2em;
+  border: none;
+  margin: auto 0 auto 10px;
+  border-radius: 4px;
+}
+
 .App-header {
   min-height: auto;
   min-width: auto;
@@ -87,6 +98,7 @@
 .flex-box{
   display: flex;
   padding: 0;
+  text-align: center;
 }
 
 .App-list-view {
@@ -103,6 +115,13 @@
 
 .App-list-btn:hover {
   background-color: #888888;
+}
+
+.App-data-btn {
+  width: 10vw;
+  height: auto;
+  padding: 4px 2px;
+  margin: 0 auto 0 auto;
 }
 
 .table {

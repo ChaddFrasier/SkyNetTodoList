@@ -3,29 +3,43 @@ import {
     Form,
     Input,
     Label,
-    Divider
+    Divider,
+    Segment
   } from 'semantic-ui-react';
 
 const ListForm = (props) => {
+
     return (
-        <Form onSubmit={props.addTaskSubmitFunc}>
-            <br/>
-            <Label
-            className="App-label"
-            content="Add Task"
-            />
-            <Divider className="flex-box">
-                <Input
-                className="App-main-input"
-                type="text"
-                placeholder="Go to the store"
-                onChange={function(e){
-                    props.updateInputText(e.target.value)
-                }}
-                />
-                <Button className="App-btn" type="submit">+</Button>
-            </Divider>
-        </Form>
+        <>
+        <br/>
+        <Segment>
+            <Form onSubmit={props.addTaskSubmitFunc}>
+                <Divider className="flex-box">
+                    <Label 
+                    className="App-label"
+                    content="List Name"
+                    />
+                    <Input id="listNameInput" className="App-secondary-input" type="text" onChange={props.setDataKey}/>
+                </Divider>
+                <br/>
+                <Divider className="flex-box">
+                    <Label
+                    className="App-label"
+                    content="Add Task"
+                    />
+                    <Input
+                    className="App-main-input"
+                    type="text"
+                    placeholder="Go to the store"
+                    onChange={function(e){
+                        props.updateInputText(e.target.value)
+                    }}
+                    />
+                    <Button className="App-btn" type="submit">+</Button>
+                </Divider>
+            </Form>
+        </Segment>
+        </>
     )
 };
 

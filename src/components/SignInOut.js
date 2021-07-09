@@ -1,7 +1,8 @@
 import {
   Button,
   Form,
-  Divider
+  Divider,
+  Container
 } from 'semantic-ui-react';
 
 const SignInForm = (props) => {
@@ -28,6 +29,18 @@ const SignInForm = (props) => {
                     <Divider className="App-IDbox">
                     {props.userID}
                     </Divider>
+                    <Container className="flex-box">
+                        <Button
+                        className="App-data-btn"
+                        onClick={props.loadData}
+                        content="Load Data"
+                        type="button"/>
+                        <Button
+                        type="button"
+                        className="App-data-btn"
+                        onClick={props.uploadData}
+                        content="Save Data"/>
+                    </Container>
                 </Form>
                 </>
               );
